@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "422614522456",
+    "project_id": "behind-closed-doors-95834",
+    "storage_bucket": "behind-closed-doors-95834.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422614522456:android:8966a02d81a1ac107cc82d",
+        "android_client_info": {
+          "package_name": "com.BCD"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdnNcG1woiBZKTe0iszbIkR11CeWSskWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
