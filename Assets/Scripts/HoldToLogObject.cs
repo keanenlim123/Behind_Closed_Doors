@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 public class HoldToLogObject : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class HoldToLogObject : MonoBehaviour
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
     private Coroutine holdCoroutine;
+
+    // List to store logged object names
+    private List<string> loggedObjects = new List<string>();
 
     void Awake()
     {
@@ -50,9 +54,18 @@ public class HoldToLogObject : MonoBehaviour
 
     void AddObjectName()
     {
-        if (!notebookText.text.Contains(gameObject.name))
+        if (!loggedObjects.Contains(gameObject.name))
         {
-            notebookText.text += gameObject.name;
+            loggedObjects.Add(gameObject.name);
+            UpdateNotebookText();
+        }
+    }
+
+    void UpdateNotebookText()
+    {
+        for (int i = 0; i < loggedObjects.Count; i++)
+        {
+            notebookText.text += "- " + loggedObjects[i] + "\n";
         }
     }
 }
