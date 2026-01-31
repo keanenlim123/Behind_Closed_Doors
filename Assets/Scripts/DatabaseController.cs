@@ -5,6 +5,7 @@ using Firebase.Extensions;
 using TMPro;
 using Firebase.Auth;
 using Firebase;
+using System;
 
 /// <summary>
 /// Handles Firebase authentication and database operations for players.
@@ -27,31 +28,62 @@ public class DatabaseController : MonoBehaviour
     /// </summary>
     public TMP_InputField UsernameInput;
 
-    void Start()
-    {
-        DatabaseReference db = FirebaseDatabase.DefaultInstance.RootReference;
-        UserData testUser = new UserData { username = "TestUser", email = "test@email.com" };
-        string json = JsonUtility.ToJson(testUser);
+    /// <summary>
+    /// Canvas containing the login UI
+    /// </summary>
+    public GameObject LoginCanvas;
 
-        db.Child("users").Child("test123").SetRawJsonValueAsync(json)
-            .ContinueWithOnMainThread(task =>
-        {
-            if (task.IsFaulted)
-            {
-                foreach (var e in task.Exception.Flatten().InnerExceptions)
-                    Debug.LogError("Upload Error: " + e.Message);
-            }
-            else
-            {
-                Debug.Log("Hardcoded test user uploaded successfully!");
-            }
-        });
+    /// <summary>
+    /// Animator component for the door animation
+    /// </summary>
+    public Animator DoorAnimator;
 
-    }
+    /// <summary>
+    /// Name of the door open animation trigger (default: "OpenDoor")
+    /// </summary>
+    public string DoorOpenTrigger = "DoorOpen";
+
 
     public void SignOut()
     {
         FirebaseAuth.DefaultInstance.SignOut();
+    }
+
+    /// <summary>
+    /// Gets the current timestamp in ISO 8601 format (UTC)
+    /// </summary>
+    /// <returns>Timestamp string in format: 2026-01-30T11:03:04.517Z</returns>
+    private string GetCurrentTimestamp()
+    {
+        return DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+    }
+
+    /// <summary>
+    /// Handles successful authentication by playing door animation and hiding login canvas
+    /// </summary>
+    private void OnAuthenticationSuccess()
+    {
+        // Play door open animation
+        if (DoorAnimator != null)
+        {
+            DoorAnimator.SetTrigger(DoorOpenTrigger);
+            Debug.Log("Door animation triggered.");
+        }
+        else
+        {
+            Debug.LogWarning("DoorAnimator is not assigned!");
+        }
+
+        // Hide login canvas
+        if (LoginCanvas != null)
+        {
+            LoginCanvas.SetActive(false);
+            Debug.Log("Login canvas hidden.");
+        }
+        else
+        {
+            Debug.LogWarning("LoginCanvas is not assigned!");
+        }
     }
 
     /// <summary>
@@ -76,7 +108,8 @@ public class DatabaseController : MonoBehaviour
             UserData userData = new UserData
             {
                 username = UsernameInput.text,
-                email = EmailInput.text
+                email = EmailInput.text,
+                createdAt = GetCurrentTimestamp()
             };
 
             string json = JsonUtility.ToJson(userData);
@@ -93,6 +126,8 @@ public class DatabaseController : MonoBehaviour
                 else
                 {
                     Debug.Log("Player data uploaded successfully.");
+                    // Trigger success actions after data upload completes
+                    OnAuthenticationSuccess();
                 }
             });
         });
@@ -117,6 +152,9 @@ public class DatabaseController : MonoBehaviour
             {
                 FirebaseUser user = task.Result.User;
                 Debug.Log($"User signed in successfully, id: {user.UserId}");
+                
+                // Trigger success actions
+                OnAuthenticationSuccess();
             }
         });
     }
