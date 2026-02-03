@@ -43,7 +43,15 @@ public class DatabaseController : MonoBehaviour
     /// </summary>
     public string DoorOpenTrigger = "DoorOpen";
 
+    /// <summary>
+    /// Audio source for door opening sound
+    /// </summary>
+    public AudioSource DoorAudio;
 
+    /// <summary>
+    /// Optional: delay sound slightly to match animation timing
+    /// </summary>
+    public float DoorSoundDelay = 0f;
     public void SignOut()
     {
         FirebaseAuth.DefaultInstance.SignOut();
@@ -72,6 +80,21 @@ public class DatabaseController : MonoBehaviour
         else
         {
             Debug.LogWarning("DoorAnimator is not assigned!");
+        }
+
+        // Play door sound
+        if (DoorAudio != null)
+        {
+            if (DoorSoundDelay > 0f)
+                DoorAudio.PlayDelayed(DoorSoundDelay);
+            else
+                DoorAudio.Play();
+
+            Debug.Log("Door sound played.");
+        }
+        else
+        {
+            Debug.LogWarning("DoorAudio is not assigned!");
         }
 
         // Hide login canvas
@@ -152,7 +175,7 @@ public class DatabaseController : MonoBehaviour
             {
                 FirebaseUser user = task.Result.User;
                 Debug.Log($"User signed in successfully, id: {user.UserId}");
-                
+
                 // Trigger success actions
                 OnAuthenticationSuccess();
             }
