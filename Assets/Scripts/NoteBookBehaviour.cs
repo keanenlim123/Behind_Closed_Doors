@@ -1,71 +1,60 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
-using System.Collections;
 using System.Collections.Generic;
 
-public class HoldToScanBehaviour : MonoBehaviour
+public class NotebookBehaviour : MonoBehaviour
 {
-    public float holdTime = 3f;
     public TextMeshProUGUI notebookText;
+    public TextMeshProUGUI counterText;
 
-    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
-    private Coroutine holdCoroutine;
+    public int totalItemsToScan = 5;
 
-    // List to store logged object names
+    public Canvas completionCanvas;
+
     private List<string> loggedObjects = new List<string>();
+    private bool completed = false;
 
-    void Awake()
+    void Start()
     {
-        grabInteractable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+        if (completionCanvas != null)
+            completionCanvas.gameObject.SetActive(false);
     }
 
-    void OnEnable()
+    public void LogObject(string objectName)
     {
-        grabInteractable.selectEntered.AddListener(OnGrab);
-        grabInteractable.selectExited.AddListener(OnRelease);
-    }
+        if (loggedObjects.Contains(objectName) || completed)
+            return;
 
-    void OnDisable()
-    {
-        grabInteractable.selectEntered.RemoveListener(OnGrab);
-        grabInteractable.selectExited.RemoveListener(OnRelease);
-    }
+        loggedObjects.Add(objectName);
+        UpdateNotebookText();
+        UpdateCounter();
 
-    void OnGrab(SelectEnterEventArgs args)
-    {
-        holdCoroutine = StartCoroutine(HoldTimer());
-    }
-
-    void OnRelease(SelectExitEventArgs args)
-    {
-        if (holdCoroutine != null)
-        {
-            StopCoroutine(holdCoroutine);
-            holdCoroutine = null;
-        }
-    }
-
-    IEnumerator HoldTimer()
-    {
-        yield return new WaitForSeconds(holdTime);
-        AddObjectName();
-    }
-
-    void AddObjectName()
-    {
-        if (!loggedObjects.Contains(gameObject.name))
-        {
-            loggedObjects.Add(gameObject.name);
-            UpdateNotebookText();
-        }
+        CheckCompletion();
     }
 
     void UpdateNotebookText()
     {
+        notebookText.text = "";
+
         for (int i = 0; i < loggedObjects.Count; i++)
         {
             notebookText.text += "- " + loggedObjects[i] + "\n";
+        }
+    }
+
+    void UpdateCounter()
+    {
+        counterText.text = loggedObjects.Count + " / " + totalItemsToScan;
+    }
+
+    void CheckCompletion()
+    {
+        if (loggedObjects.Count >= totalItemsToScan)
+        {
+            completed = true;
+
+            if (completionCanvas != null)
+                completionCanvas.gameObject.SetActive(true);
         }
     }
 }
