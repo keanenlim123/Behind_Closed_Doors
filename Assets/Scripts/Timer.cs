@@ -47,30 +47,53 @@ public class Timer : MonoBehaviour
         }
     }
 
-    private void UploadTimeToFirebase()
+private void UploadTimeToFirebase()
+{
+    FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
+    if (user == null)
     {
-        FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
-        if (user == null)
+        Debug.LogWarning("No user logged in, cannot upload time.");
+        return;
+    }
+
+    string uid = user.UserId;
+    DatabaseReference db = FirebaseDatabase.DefaultInstance.RootReference;
+    DatabaseReference bestTimeRef = db.Child("users").Child(uid).Child("userStats").Child("bestRecordedTime");
+
+    bestTimeRef.GetValueAsync().ContinueWith(task =>
+    {
+        if (task.IsFaulted)
         {
-            Debug.LogWarning("No user logged in, cannot upload time.");
+            Debug.LogError("Failed to retrieve best time: " + task.Exception);
             return;
         }
 
-        string uid = user.UserId;
-        DatabaseReference db = FirebaseDatabase.DefaultInstance.RootReference;
-        db.Child("users").Child(uid).Child("bestRecordedTime").SetValueAsync(elapsedTime)
-            .ContinueWith(task =>
+        float previousBest = float.MaxValue;
+        if (task.Result.Exists && float.TryParse(task.Result.Value.ToString(), out float fetchedBest))
+        {
+            previousBest = fetchedBest;
+        }
+
+        if (elapsedTime < previousBest)
+        {
+            bestTimeRef.SetValueAsync(elapsedTime).ContinueWith(setTask =>
             {
-                if (task.IsFaulted)
+                if (setTask.IsFaulted)
                 {
-                    Debug.LogError("Failed to upload session time: " + task.Exception);
+                    Debug.LogError("Failed to upload session time: " + setTask.Exception);
                 }
                 else
                 {
                     Debug.Log("Session time uploaded: " + elapsedTime + " seconds");
                 }
             });
-    }
+        }
+        else
+        {
+            Debug.Log("New time (" + elapsedTime + "s) is not better than previous best (" + previousBest + "s). Not updating.");
+        }
+    });
+}
 
     void OnApplicationQuit()
     {
