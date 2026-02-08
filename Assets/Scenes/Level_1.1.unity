@@ -3153,6 +3153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 155983641}
+  - component: {fileID: 155983645}
   - component: {fileID: 155983644}
   - component: {fileID: 155983643}
   - component: {fileID: 155983642}
@@ -3350,6 +3351,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &155983645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155983640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9e953c597612c4d95577eec17a420a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievementId: laundry
 --- !u!4 &158923085 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1670256625, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -3600,6 +3614,8 @@ GameObject:
   m_Component:
   - component: {fileID: 187511452}
   - component: {fileID: 187511451}
+  - component: {fileID: 187511453}
+  - component: {fileID: 187511454}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -3719,6 +3735,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &187511453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187511450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe637a51490db14488d5b90a702928a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievements: []
+--- !u!114 &187511454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187511450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09151629aa389314eb8e2759205ba29a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  badgeSystem: {fileID: 187511453}
 --- !u!1 &189761627
 GameObject:
   m_ObjectHideFlags: 0
@@ -6602,6 +6644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 407919263}
+  - component: {fileID: 407919264}
   - component: {fileID: 407919262}
   - component: {fileID: 407919261}
   - component: {fileID: 407919260}
@@ -6798,6 +6841,19 @@ Transform:
   - {fileID: 2146587079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &407919264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407919259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9e953c597612c4d95577eec17a420a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievementId: dumbells
 --- !u!1 &409679653 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f540665b8c997284991bc147310f337c, type: 3}
@@ -8898,6 +8954,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 474108568}
+  - component: {fileID: 474108572}
   - component: {fileID: 474108571}
   - component: {fileID: 474108570}
   - component: {fileID: 474108569}
@@ -9095,6 +9152,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &474108572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474108567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9e953c597612c4d95577eec17a420a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievementId: penknife
 --- !u!4 &474544232 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0bea34e3f34f8c4469a7ffdd1a1954d2, type: 3}
@@ -24101,6 +24171,7 @@ GameObject:
   - component: {fileID: 1451297782}
   - component: {fileID: 1451297785}
   - component: {fileID: 1451297784}
+  - component: {fileID: 1451297786}
   - component: {fileID: 1451297783}
   m_Layer: 0
   m_Name: Pills
@@ -24295,6 +24366,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &1451297786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451297781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9e953c597612c4d95577eec17a420a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievementId: pills
 --- !u!1 &1456288352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4919795736482855803, guid: 301375a58ba615241825d68c0a086626, type: 3}
@@ -38789,7 +38873,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &4184523589842856095 stripped
 GameObject:
@@ -39128,7 +39212,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &8636293775660438545
 MeshRenderer:
