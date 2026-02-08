@@ -11,6 +11,8 @@ public class NotebookBehaviour : MonoBehaviour
 
     public Canvas completionCanvas;
 
+    public AudioSource logAudio; // Assign an AudioSource in the Inspector
+
     private List<string> loggedObjects = new List<string>();
     private bool completed = false;
 
@@ -28,6 +30,8 @@ public class NotebookBehaviour : MonoBehaviour
         loggedObjects.Add(objectName);
         UpdateNotebookText();
         UpdateCounter();
+
+        PlayLogAudio();
 
         CheckCompletion();
     }
@@ -56,5 +60,11 @@ public class NotebookBehaviour : MonoBehaviour
             if (completionCanvas != null)
                 completionCanvas.gameObject.SetActive(true);
         }
+    }
+
+    void PlayLogAudio()
+    {
+        if (logAudio != null)
+            logAudio.Play();
     }
 }

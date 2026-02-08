@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,33 +7,39 @@ public class SceneTransitionManager : MonoBehaviour
 {
     public FadeScreen fadeScreen;
 
-    private void Start()
+    [Header("Scene Lists")]
+    public List<int> normalScenes = new List<int>(); // Difficulty 0
+    public List<int> hardScenes = new List<int>();   // Difficulty > 0
+
+    [Header("Gameplay Settings")]
+    public int difficulty = 0; // Set this from other scripts or Inspector
+
+    // This function is called by your UI button
+    public void OnNextSceneButtonClicked()
     {
-        StartScene();
+        StartCoroutine(RunRandomScene());
     }
 
-    private void StartScene()
+    private IEnumerator RunRandomScene()
     {
-        StartCoroutine(StartSceneRoutine());
-    }
+        // Pick a random scene based on difficulty
+        int sceneIndex;
 
-    private IEnumerator StartSceneRoutine()
-    {
-        fadeScreen.gameObject.SetActive(true);
-        fadeScreen.FadeIn();
-        yield return new WaitForSeconds(fadeScreen.fadeDuration);
+        if (difficulty > 0 && hardScenes.Count > 0)
+        {
+            sceneIndex = hardScenes[Random.Range(0, hardScenes.Count)];
+        }
+        else if (normalScenes.Count > 0)
+        {
+            sceneIndex = normalScenes[Random.Range(0, normalScenes.Count)];
+        }
+        else
+        {
+            Debug.LogWarning("Scene lists are empty!");
+            yield break;
+        }
 
-        // set FadeScreen to inactive, to prevent blocking ray interactors and UI canvas
-        fadeScreen.gameObject.SetActive(false);
-    }
-
-    public void GoToScene(int sceneIndex)
-    {
-        StartCoroutine(GoToSceneRoutine(sceneIndex));
-    }
-
-    private IEnumerator GoToSceneRoutine(int sceneIndex)
-    {
+        // Fade out before loading next scene
         fadeScreen.gameObject.SetActive(true);
         fadeScreen.FadeOut();
         yield return new WaitForSeconds(fadeScreen.fadeDuration);

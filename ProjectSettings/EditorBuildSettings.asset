@@ -12,8 +12,26 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_1.1.unity
     guid: 4e9fef26e6adb88479ad1b9834a32d94
   - enabled: 1
+    path: Assets/Scenes/Level_1.2.unity
+    guid: 75944cfec5f652447a13876db5fe8ebb
+  - enabled: 1
+    path: Assets/Scenes/Level_1.3.unity
+    guid: 953d2a863af1ca042aa9539f3e1cfbcb
+  - enabled: 1
+    path: Assets/Scenes/Level_2.1.unity
+    guid: 651b818e02f27584cbfe186cd25eb359
+  - enabled: 1
+    path: Assets/Scenes/Level_2.2.unity
+    guid: bde6e05f39a223845b9de30a18dabfe3
+  - enabled: 1
+    path: Assets/Scenes/Level_2.3.unity
+    guid: d178badc031264048977f8c990907679
+  - enabled: 1
     path: Assets/Scenes/TrueEnding.unity
     guid: 1eecf32b13ee9474796d836417eca805
+  - enabled: 1
+    path: Assets/Scenes/BadEnding.unity
+    guid: aad87306656b85c498b3fa3f08dc7189
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
