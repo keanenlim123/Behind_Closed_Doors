@@ -19124,7 +19124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77754592dc5059e499d44a4b045c28a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startFadedIn: 1
+  startFadedIn: 0
   fadeDuration: 5
   holdDuration: 3
   fadeColor: {r: 0, g: 0, b: 0, a: 0}
@@ -20773,8 +20773,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 537079477}
         m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
-        m_MethodName: GoToScene
-        m_Mode: 3
+        m_MethodName: OnNextSceneButtonClicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
