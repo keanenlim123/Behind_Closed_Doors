@@ -1,3 +1,8 @@
+/// Author : Keanen Lim
+/// Date Created : 10/02/2026
+/// Description : Captions related to schizophrenia.
+/// 
+
 public class SchizophreniaCaptions
 {
     public string notepad = "More notes… you must be planning something or keeping track of schoolwork.";

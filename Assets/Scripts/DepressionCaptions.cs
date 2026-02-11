@@ -1,3 +1,8 @@
+/// Author : Keanen Lim
+/// Date Created : 05/02/2026
+/// Description : Captions related to depression disorder.
+/// 
+
 public class DepressionCaptions
 {
     public string pills = "Huh… pills? Maybe the doctor gave you vitamins or something. You've always been a bit tired lately.";

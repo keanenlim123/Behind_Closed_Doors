@@ -1,3 +1,8 @@
+/// Author : Keanen Lim
+/// Date Created : 21/01/2026
+/// Description : Handles Firebase authentication and database operations for players.
+/// Supports signing up, signing in, signing out, and uploading initial player data including habitats and animals.
+
 using UnityEngine;
 using Firebase.Database;
 using System.Collections.Generic;
@@ -7,10 +12,6 @@ using Firebase.Auth;
 using Firebase;
 using System;
 
-/// <summary>
-/// Handles Firebase authentication and database operations for players.
-/// Supports signing up, signing in, signing out, and uploading initial player data including habitats and animals.
-/// </summary>
 public class DatabaseController : MonoBehaviour
 {
     /// <summary>

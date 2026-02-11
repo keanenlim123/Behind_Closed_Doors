@@ -1,3 +1,8 @@
+/// Author : Justin Tan
+/// Date Created : 10/02/2026
+/// Description : Captions related to eating disorders.
+/// 
+
 public class EatingDisorderCaptions
 {
     public string snackBar = "You bought snacks? That's new. Just don't forget to eat proper meals, okay?";

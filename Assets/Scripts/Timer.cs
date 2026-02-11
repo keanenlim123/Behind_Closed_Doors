@@ -1,3 +1,8 @@
+/// Author : Jaasper Lee
+/// Date Created : 28/01/2026
+/// Description : Timer component to track elapsed time during a game session and upload the best time to Firebase upon game end or scene unload.
+/// 
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Firebase.Database;
@@ -13,11 +18,11 @@ public class Timer : MonoBehaviour
         Debug.Log("Timer started.");
         elapsedTime = 0f;
         timerRunning = true;
-        // Listen for scene changes
+        /// Listen for scene changes
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
-    void Update()
+    void Update() /// Update the timer each frame if running
     {
         if (timerRunning)
         {
@@ -25,19 +30,19 @@ public class Timer : MonoBehaviour
         }
     }
 
-    // Call this when the game ends
+    /// Call this when the game ends
     public void EndGame()
     {
         if (timerRunning)
         {
             timerRunning = false;
             UploadTimeToFirebase();
-            // Optionally, remove the sceneUnloaded event if game ends
+
             SceneManager.sceneUnloaded -= OnSceneUnloaded;
         }
     }
 
-    private void OnSceneUnloaded(Scene current)
+    private void OnSceneUnloaded(Scene current) /// Handle scene unload to upload time
     {
         if (timerRunning)
         {
@@ -47,7 +52,7 @@ public class Timer : MonoBehaviour
         }
     }
 
-private void UploadTimeToFirebase()
+private void UploadTimeToFirebase() /// Upload the elapsed time to Firebase if it's a new best time
 {
     FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
     if (user == null)
@@ -69,7 +74,7 @@ private void UploadTimeToFirebase()
         }
 
         float previousBest = float.MaxValue;
-        if (task.Result.Exists && float.TryParse(task.Result.Value.ToString(), out float fetchedBest))
+        if (task.Result.Exists && float.TryParse(task.Result.Value.ToString(), out float fetchedBest)) /// Parse existing best time
         {
             previousBest = fetchedBest;
         }
@@ -95,7 +100,7 @@ private void UploadTimeToFirebase()
     });
 }
 
-    void OnApplicationQuit()
+    void OnApplicationQuit() /// Handle application quit to upload time
     {
         if (timerRunning)
         {
@@ -108,7 +113,7 @@ private void UploadTimeToFirebase()
 
     void OnDestroy()
     {
-        // Clean up event subscription
+        /// Clean up event subscription
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
 }

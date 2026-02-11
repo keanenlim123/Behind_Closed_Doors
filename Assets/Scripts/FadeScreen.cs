@@ -1,3 +1,8 @@
+/// Author : Justin Tan
+/// Date Created : 30/01/2026
+/// Description : Handles the ending scene logic, including user verification and updating user statistics in Firebase.
+/// 
+
 using System.Collections;
 using UnityEngine;
 
@@ -11,7 +16,7 @@ public class FadeScreen : MonoBehaviour
 
     private Renderer rend;
 
-    void Start()
+    void Start() /// Initialize the renderer and set starting fade state
     {
         rend = GetComponent<Renderer>();
 
@@ -26,31 +31,39 @@ public class FadeScreen : MonoBehaviour
         }
     }
 
-    // Fade from black → visible
+    /// <summary>
+    /// Fade from black → visible
+    /// </summary>
     public void FadeIn()
     {
         StartCoroutine(FadeCoroutine(1f, 0f));
     }
 
-    // Fade from visible → black
+    /// <summary>
+    /// Fade from visible → black
+    /// </summary>
     public void FadeOut()
     {
         StartCoroutine(FadeCoroutine(0f, 1f));
     }
 
-    // Generic fade if you want manual control
+    /// <summary>
+    /// Generic fade if you want manual control
+    /// </summary>
     public void Fade(float alphaIn, float alphaOut)
     {
         StartCoroutine(FadeCoroutine(alphaIn, alphaOut));
     }
 
-    // Loading-style fade (fade out → hold → fade in)
+    /// <summary>
+    /// Loading-style fade (fade out → hold → fade in)
+    /// </summary>
     public void FadeForLoading()
     {
         StartCoroutine(FadeForLoadingRoutine());
     }
 
-    IEnumerator FadeForLoadingRoutine()
+    IEnumerator FadeForLoadingRoutine() /// Fade out, hold, then fade in
     {
         yield return StartCoroutine(FadeCoroutine(0f, 1f));
 
@@ -59,7 +72,7 @@ public class FadeScreen : MonoBehaviour
         yield return StartCoroutine(FadeCoroutine(1f, 0f));
     }
 
-    IEnumerator FadeCoroutine(float alphaIn, float alphaOut)
+    IEnumerator FadeCoroutine(float alphaIn, float alphaOut) /// Generic fade coroutine
     {
         float timer = 0f;
 
@@ -76,7 +89,9 @@ public class FadeScreen : MonoBehaviour
             yield return null;
         }
 
-        // Ensure final alpha is exact
+        /// <summary>
+        /// Ensure final alpha is exact
+        /// </summary>
         Color finalColor = fadeColor;
         finalColor.a = alphaOut;
         rend.material.SetColor("_BaseColor", finalColor);

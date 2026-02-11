@@ -1,3 +1,8 @@
+/// Author : Keanen Lim
+/// Date Created : 03/02/2026
+/// Description : Handles the ending scene logic, including user verification and updating user statistics in Firebase.
+/// 
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -19,7 +24,7 @@ public class EndingSceneScript : MonoBehaviour
     FirebaseAuth auth;
     DatabaseReference db;
 
-    void Start()
+    void Start() /// Initialize Firebase and set up button listeners
     {
         auth = FirebaseAuth.DefaultInstance;
         db = FirebaseDatabase.DefaultInstance.RootReference;
@@ -28,13 +33,13 @@ public class EndingSceneScript : MonoBehaviour
         secondVerificationButton.onClick.AddListener(OnSecondVerification);
     }
 
-    void OnFirstVerification()
+    void OnFirstVerification() /// Handle the first verification step
     {
         firstVerified = true;
         Debug.Log("First verification complete.");
     }
 
-    void OnSecondVerification()
+    void OnSecondVerification() /// Handle the second verification step and update stats
     {
         if (!firstVerified || statsUpdated)
             return;
@@ -48,7 +53,7 @@ public class EndingSceneScript : MonoBehaviour
         else
             SceneManager.LoadScene(badEndingScene);
     }
-    void UpdateUserStats()
+    void UpdateUserStats() /// Update the user's statistics in Firebase
     {
         if (auth.CurrentUser == null)
             return;
@@ -71,10 +76,10 @@ public class EndingSceneScript : MonoBehaviour
 
             DataSnapshot snapshot = task.Result;
 
-            if (snapshot.Child("timesPlayed").Exists)
+            if (snapshot.Child("timesPlayed").Exists) /// Get current times played
                 timesPlayed = int.Parse(snapshot.Child("timesPlayed").Value.ToString());
 
-            if (snapshot.Child("difficulty").Exists)
+            if (snapshot.Child("difficulty").Exists) /// Get current difficulty
                 difficulty = int.Parse(snapshot.Child("difficulty").Value.ToString());
 
             // +1 logic

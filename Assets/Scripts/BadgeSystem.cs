@@ -1,3 +1,7 @@
+/// Author : Jaasper Lee
+/// Date Created : 05/02/2026
+/// Description : Manages the badge system for tracking and unlocking achievements.
+/// 
 using UnityEngine;
 using System.Collections.Generic;
 using Firebase.Database;
@@ -5,12 +9,12 @@ using Firebase.Auth;
 
 public class BadgeSystem : MonoBehaviour
 {
-    public List<Achievement> achievements = new List<Achievement>();
+    public List<Achievement> achievements = new List<Achievement>(); /// List of all achievements
 
     private DatabaseReference db;
     private string userId;
 
-    void Start()
+    void Start() /// Initialize the badge system and load achievements
     {
         db = FirebaseDatabase.DefaultInstance.RootReference;
         userId = FirebaseAuth.DefaultInstance.CurrentUser?.UserId;
@@ -25,7 +29,7 @@ public class BadgeSystem : MonoBehaviour
             CheckTimesPlayed();
     }
 
-    private void CheckTimesPlayed()
+    private void CheckTimesPlayed() /// Check how many times the user has played the game
     {
         db.Child("users").Child(userId).Child("userStats").Child("timesPlayed").GetValueAsync().ContinueWith(task =>
         {
@@ -48,7 +52,7 @@ public class BadgeSystem : MonoBehaviour
         });
     }
 
-    public void RegisterPickup(string item)
+    public void RegisterPickup(string item) /// Register a pickup and update achievement progress
     {
         foreach (var ach in achievements)
         {
@@ -63,7 +67,7 @@ public class BadgeSystem : MonoBehaviour
         }
     }
 
-    private void SaveBadge(Achievement achievement)
+    private void SaveBadge(Achievement achievement) /// Save the unlocked badge to Firebase
     {
         if (userId == null) return;
         string badgePath = $"users/{userId}/userStats/badges/{achievement.id}";
@@ -71,5 +75,4 @@ public class BadgeSystem : MonoBehaviour
         Debug.Log($"Badge unlocked: {achievement.name}");
     }
 
-    // For future achievements, just add new Achievement instances in Start()
 }

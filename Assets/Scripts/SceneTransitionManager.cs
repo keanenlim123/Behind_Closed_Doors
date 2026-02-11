@@ -1,3 +1,8 @@
+/// Author : Justin Tan + Waine Low
+/// Date Created : 30/01/2026
+/// Description : Manages scene transitions with fade effects and selects scenes based on user difficulty from Firebase.
+/// 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +24,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     private int userDifficulty = 0; // Default to normal
 
-    void Start()
+    void Start() 
     {
         auth = FirebaseAuth.DefaultInstance;
         db = FirebaseDatabase.DefaultInstance.RootReference;
@@ -27,7 +32,7 @@ public class SceneTransitionManager : MonoBehaviour
         FetchUserDifficulty();
     }
 
-    private void FetchUserDifficulty()
+    private void FetchUserDifficulty() /// Fetch the user's difficulty setting from Firebase
     {
         if (auth.CurrentUser == null)
         {
@@ -48,7 +53,7 @@ public class SceneTransitionManager : MonoBehaviour
             }
             else if (task.IsCompleted)
             {
-                DataSnapshot snapshot = task.Result;
+                DataSnapshot snapshot = task.Result; /// Access the data snapshot
 
                 if (snapshot.Exists)
                 {
@@ -69,15 +74,17 @@ public class SceneTransitionManager : MonoBehaviour
             }
         });
     }
-    // Called by your UI button
+    /// <summary>
+    /// Called by your UI button
+    /// </summary>
     public void OnNextSceneButtonClicked()
     {
         StartCoroutine(RunRandomScene());
     }
 
-    private IEnumerator RunRandomScene()
+    private IEnumerator RunRandomScene() /// Run a random scene based on user difficulty
     {
-        // Pick a random scene based on fetched difficulty
+        /// Pick a random scene based on fetched difficulty
         int sceneIndex;
 
         if (userDifficulty > 0 && hardScenes.Count > 0)
@@ -94,7 +101,7 @@ public class SceneTransitionManager : MonoBehaviour
             yield break;
         }
 
-        // Fade out before loading
+        /// Fade out before loading
         fadeScreen.gameObject.SetActive(true);
         fadeScreen.FadeOut();
         yield return new WaitForSeconds(fadeScreen.fadeDuration);
