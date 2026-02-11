@@ -2,24 +2,40 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
+using Firebase.Database;
 
 public class ScannableObject : MonoBehaviour
 {
     public float holdTime = 3f;
     public NotebookBehaviour notebook;
 
-    public Image radialScanImage; // assign the circular Image
-    public Canvas scanCanvas;     // optional, shows bar
+    public Image radialScanImage;
+    public Canvas scanCanvas;
+
+    public string disorderType;   // eatingDisorder / depression / schizophrenia
+    public string objectKey;      // snackBar / pills / notebook etc
+
+    public AudioSource scanAudioSource;
+    public TextMeshProUGUI captionText;
+    public float captionDisplayTime = 3f;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
     private Coroutine holdCoroutine;
     private bool hasBeenScanned = false;
 
+    private DatabaseReference db;
+
     void Awake()
     {
         grabInteractable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+        db = FirebaseDatabase.DefaultInstance.RootReference;
+
         if (scanCanvas != null)
             scanCanvas.gameObject.SetActive(false);
+
+        if (captionText != null)
+            captionText.gameObject.SetActive(false);
     }
 
     void OnEnable()
@@ -74,8 +90,50 @@ public class ScannableObject : MonoBehaviour
     void ScanObject()
     {
         hasBeenScanned = true;
-        notebook.LogObject(gameObject.name);
+
+        if (notebook != null)
+            notebook.LogObject(objectKey);
+
+        if (scanAudioSource != null)
+            scanAudioSource.Play();
+
+        StartCoroutine(GetCaptionFromDatabase());
+
         ResetScanUI();
+    }
+
+    IEnumerator GetCaptionFromDatabase()
+    {
+        var task = db.Child("captions")
+                     .Child(disorderType)
+                     .Child(objectKey)
+                     .GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.Exception != null)
+        {
+            Debug.LogError(task.Exception);
+            yield break;
+        }
+
+        if (task.Result.Exists)
+        {
+            string captionMessage = task.Result.Value.ToString();
+
+            if (!string.IsNullOrEmpty(captionMessage))
+                StartCoroutine(ShowCaption(captionMessage));
+        }
+    }
+
+    IEnumerator ShowCaption(string message)
+    {
+        captionText.gameObject.SetActive(true);
+        captionText.text = message;
+
+        yield return new WaitForSeconds(captionDisplayTime);
+
+        captionText.gameObject.SetActive(false);
     }
 
     void ResetScanUI()
