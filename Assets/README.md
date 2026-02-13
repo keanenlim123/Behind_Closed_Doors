@@ -58,6 +58,11 @@ Players take on the role of a mother exploring her daughter’s bedroom, uncover
 5. Reflect on discovered clues to understand the emotional narrative.
 6. Progress toward the ending scene.
 
+# Game Hacks
+- Not every disorder scene uses the key + drawer mechanic only Depression and Schizophrenia do.
+- The false bottom drawer won’t open unless you press the hidden button under the desk first.
+- Clues are identified with a white silhouette that glows around the object. The key is not a clue!
+
 # Game Objective
 The objective of Behind Closed Doors is to raise awareness of youth mental health challenges through immersive virtual reality storytelling.
 
