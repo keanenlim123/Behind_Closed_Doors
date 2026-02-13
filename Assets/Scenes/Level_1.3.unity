@@ -1583,7 +1583,6 @@ GameObject:
   - component: {fileID: 80178903}
   - component: {fileID: 80178902}
   - component: {fileID: 80178901}
-  - component: {fileID: 80178904}
   m_Layer: 0
   m_Name: 'Depression '
   m_TagString: Untagged
@@ -1793,23 +1792,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80178899}
   m_CullTransparentMesh: 1
---- !u!114 &80178904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 80178899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e529efd23fb58db48aadbf9ea0281064, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstVerificationButton: {fileID: 80178901}
-  secondVerificationButton: {fileID: 1589770809}
-  trueEndingScene: TrueEnding
-  badEndingScene: BadEnding
-  isTrueEnding: 1
 --- !u!4 &94749895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
@@ -13526,6 +13508,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1589770810}
+        m_TargetAssemblyTypeName: EndingSceneScript, Assembly-CSharp
+        m_MethodName: OnSubmit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -16291,7 +16285,6 @@ GameObject:
   - component: {fileID: 874158563}
   - component: {fileID: 874158562}
   - component: {fileID: 874158561}
-  - component: {fileID: 874158564}
   m_Layer: 0
   m_Name: Schizophrenia
   m_TagString: Untagged
@@ -16499,23 +16492,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874158559}
   m_CullTransparentMesh: 1
---- !u!114 &874158564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874158559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e529efd23fb58db48aadbf9ea0281064, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstVerificationButton: {fileID: 874158561}
-  secondVerificationButton: {fileID: 1589770809}
-  trueEndingScene: TrueEnding
-  badEndingScene: BadEnding
-  isTrueEnding: 0
 --- !u!1001 &882209112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26150,6 +26126,7 @@ GameObject:
   - component: {fileID: 1589770808}
   - component: {fileID: 1589770807}
   - component: {fileID: 1589770809}
+  - component: {fileID: 1589770810}
   m_Layer: 0
   m_Name: Submit
   m_TagString: Untagged
@@ -26333,6 +26310,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1589770810}
+        m_TargetAssemblyTypeName: EndingSceneScript, Assembly-CSharp
+        m_MethodName: OnSubmit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1589770810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589770805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e529efd23fb58db48aadbf9ea0281064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trueEndingScene: TrueEnding
+  badEndingScene: BadEnding
+  correctOption: {fileID: 1853735739}
+  wrongOption1: {fileID: 1679275089}
+  wrongOption2: {fileID: 903278732}
 --- !u!1 &1590677178
 GameObject:
   m_ObjectHideFlags: 0
@@ -26892,11 +26898,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e529efd23fb58db48aadbf9ea0281064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstVerificationButton: {fileID: 874158561}
-  secondVerificationButton: {fileID: 1589770809}
   trueEndingScene: TrueEnding
   badEndingScene: BadEnding
-  isTrueEnding: 1
+  correctOption: {fileID: 0}
+  wrongOption1: {fileID: 0}
+  wrongOption2: {fileID: 0}
 --- !u!114 &1624253832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28371,7 +28377,6 @@ GameObject:
   - component: {fileID: 1693702135}
   - component: {fileID: 1693702134}
   - component: {fileID: 1693702133}
-  - component: {fileID: 1693702136}
   m_Layer: 0
   m_Name: Eating Disorder
   m_TagString: Untagged
@@ -28579,23 +28584,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693702131}
   m_CullTransparentMesh: 1
---- !u!114 &1693702136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693702131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e529efd23fb58db48aadbf9ea0281064, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstVerificationButton: {fileID: 1693702133}
-  secondVerificationButton: {fileID: 1589770809}
-  trueEndingScene: TrueEnding
-  badEndingScene: BadEnding
-  isTrueEnding: 0
 --- !u!1001 &1696417614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37644,11 +37632,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e529efd23fb58db48aadbf9ea0281064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstVerificationButton: {fileID: 1693702133}
-  secondVerificationButton: {fileID: 1589770809}
   trueEndingScene: TrueEnding
   badEndingScene: BadEnding
-  isTrueEnding: 0
+  correctOption: {fileID: 0}
+  wrongOption1: {fileID: 0}
+  wrongOption2: {fileID: 0}
 --- !u!114 &2023802096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38393,11 +38381,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e529efd23fb58db48aadbf9ea0281064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstVerificationButton: {fileID: 80178901}
-  secondVerificationButton: {fileID: 1589770809}
   trueEndingScene: TrueEnding
   badEndingScene: BadEnding
-  isTrueEnding: 0
+  correctOption: {fileID: 0}
+  wrongOption1: {fileID: 0}
+  wrongOption2: {fileID: 0}
 --- !u!114 &2077944861
 MonoBehaviour:
   m_ObjectHideFlags: 0
