@@ -3,6 +3,22 @@ Behind Closed Doors is a virtual reality (VR) narrative exploration experience d
 
 Players take on the role of a mother exploring her daughter’s bedroom, uncovering subtle environmental clues that suggest underlying emotional struggles. The experience focuses on empathy, awareness, and reflection rather than clinical diagnosis, encouraging meaningful conversations around mental health.
 
+# Purpose & Vision
+- Promote awareness of youth mental health challenges
+- Encourage empathy by placing players in a caregiver’s perspective
+- Highlight subtle warning signs often overlooked in real life
+- Reduce stigma around emotional struggles
+- Encourage open conversations and help-seeking behaviour
+
+# Core Features
+- Immersive first-person VR experience
+- Environmental storytelling through interactive objects
+- Voice narration from the mother’s perspective
+- Subtle audio cues representing emotional states
+- Firebase user authentication system
+- Player data tracking (difficulty, session data, etc.)
+- Reflective ending sequence
+
 # System Requirements
 ## Hardware
 - Meta Quest 2 (or compatible VR headset)
@@ -20,10 +36,19 @@ Players take on the role of a mother exploring her daughter’s bedroom, uncover
 - Game Engine: Unity (XR / VR System)
 
 # Controls & Gameplay Instructions
-## Controls
+## VR Controls
 - Grip Button: Grab or hold items (Right Controller)
-- Teleport Button: Teleport to position (Right Controller)
+- Teleport Joystick: Teleport to position (Right Controller)
 - Joystick / Thumbstick: Movement or turning (Left Controller)
+
+## Keyboard Controls
+- W – Move Forward
+- A – Move Left
+- S – Move Backward
+- D – Move Right
+- G – Grab / Pick up object / Scan object
+- I – Teleport to targeted position
+- Mouse Movement – Look around
 
 ## Gameplay Flow
 1. Launch the VR experience.
